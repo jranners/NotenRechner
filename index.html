@@ -28,12 +28,59 @@
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       }
-      .neon-glow-secondary { filter: drop-shadow(0 0 8px #4edea3); }
-      .neon-glow-primary { filter: drop-shadow(0 0 12px rgba(77, 142, 255, 0.4)); }
+      /* Loading Screen Styles */
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff; /* light mode fallback */
+        z-index: 9999;
+        transition: opacity 0.4s ease-out;
+      }
+      html.dark #initial-loader {
+        background-color: #09090b; /* zinc-950 */
+      }
+      .loader-logo {
+        width: 44px;
+        height: 44px;
+        position: relative;
+      }
+      .loader-path {
+        fill: none;
+        stroke: #18181b; /* zinc-900 */
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+        animation: drawPath 2s ease-in-out infinite alternate;
+      }
+      html.dark .loader-path {
+        stroke: #f4f4f5; /* zinc-100 */
+      }
+      @keyframes drawPath {
+        0% { stroke-dashoffset: 100; opacity: 0.3; }
+        100% { stroke-dashoffset: 0; opacity: 1; }
+      }
+      
+      /* Optional pulsing glow for dark mode */
+      html.dark .loader-logo {
+        filter: drop-shadow(0 0 12px rgba(244, 244, 245, 0.1));
+      }
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Splash Screen / Loader -->
+      <div id="initial-loader">
+        <svg class="loader-logo" viewBox="0 0 48 48">
+          <!-- Stylized 'N' combining minimalist geometry -->
+          <path class="loader-path" d="M 12 36 L 12 12 L 36 36 L 36 12" />
+        </svg>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
