@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed-variant": "#005236",
+              "surface": "#0c1324",
+              "on-error": "#690005",
+              "primary-fixed": "#d8e2ff",
+              "outline": "#8c909f",
+              "outline-variant": "#424754",
+              "surface-tint": "#adc6ff",
+              "secondary-container": "#00a572",
+              "primary-fixed-dim": "#adc6ff",
+              "primary": "#adc6ff",
+              "error-container": "#93000a",
+              "on-primary-container": "#00285d",
+              "surface-container-lowest": "#070d1f",
+              "on-surface-variant": "#c2c6d6",
+              "inverse-primary": "#005ac2",
+              "on-primary-fixed-variant": "#004395",
+              "tertiary-container": "#8083ff",
+              "on-error-container": "#ffdad6",
+              "background": "#0c1324",
+              "on-secondary-fixed": "#002113",
+              "surface-dim": "#0c1324",
+              "inverse-surface": "#dce1fb",
+              "surface-container-low": "#151b2d",
+              "primary-container": "#4d8eff",
+              "on-primary": "#002e6a",
+              "on-tertiary-container": "#0d0096",
+              "surface-variant": "#2e3447",
+              "tertiary": "#c0c1ff",
+              "on-tertiary": "#1000a9",
+              "on-tertiary-fixed-variant": "#2f2ebe",
+              "on-background": "#dce1fb",
+              "error": "#ffb4ab",
+              "surface-container-high": "#23293c",
+              "tertiary-fixed": "#e1e0ff",
+              "inverse-on-surface": "#2a3043",
+              "secondary-fixed": "#6ffbbe",
+              "on-primary-fixed": "#001a42",
+              "secondary-fixed-dim": "#4edea3",
+              "secondary": "#4edea3",
+              "surface-container-highest": "#2e3447",
+              "tertiary-fixed-dim": "#c0c1ff",
+              "surface-container": "#191f31",
+              "on-secondary-container": "#00311f",
+              "on-surface": "#dce1fb",
+              "on-secondary": "#003824",
+              "on-tertiary-fixed": "#07006c",
+              "surface-bright": "#33394c"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neon-glow-secondary {
+            filter: drop-shadow(0 0 8px #4edea3);
+        }
+        .glass-header {
+            background: rgba(12, 19, 36, 0.4);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden lg:flex flex-col h-screen sticky top-0 bg-surface w-64 border-r border-outline-variant/15 transition-all duration-300 ease-in-out">
+<div class="p-6">
+<h1 class="font-headline font-black text-primary text-xl">M.Sc. Economics</h1>
+<p class="font-label text-xs uppercase tracking-[0.05em] text-on-surface-variant mt-1">Akademisches Audit</p>
+</div>
+<nav class="flex-1 mt-4">
+<ul class="space-y-2">
+<li class="hover:bg-surface-container-low transition-all">
+<a class="flex items-center text-on-surface-variant pl-4 py-3 gap-3" href="#">
+<span class="material-symbols-outlined text-sm">school</span>
+<span class="font-label text-xs uppercase tracking-wider">Basisbereich (24 ECTS)</span>
+</a>
+</li>
+<li class="hover:bg-surface-container-low transition-all">
+<a class="flex items-center text-on-surface-variant pl-4 py-3 gap-3" href="#">
+<span class="material-symbols-outlined text-sm">biotech</span>
+<span class="font-label text-xs uppercase tracking-wider">Schwerpunkt (30 ECTS)</span>
+</a>
+</li>
+<li class="hover:bg-surface-container-low transition-all">
+<a class="flex items-center text-on-surface-variant pl-4 py-3 gap-3" href="#">
+<span class="material-symbols-outlined text-sm">analytics</span>
+<span class="font-label text-xs uppercase tracking-wider">Ergänzung Econ (24 ECTS)</span>
+</a>
+</li>
+<li class="border-l-4 border-secondary bg-surface-container-low">
+<a class="flex items-center text-secondary font-bold pl-4 py-3 gap-3" href="#">
+<span class="material-symbols-outlined text-sm">functions</span>
+<span class="font-label text-xs uppercase tracking-wider">Ergänzung MSS (12 ECTS)</span>
+</a>
+</li>
+<li class="hover:bg-surface-container-low transition-all">
+<a class="flex items-center text-on-surface-variant pl-4 py-3 gap-3" href="#">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+<span class="font-label text-xs uppercase tracking-wider">Masterarbeit (30 ECTS)</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t border-outline-variant/15">
+<button class="w-full py-3 bg-primary-container/20 text-primary border border-primary/30 rounded-lg font-headline font-bold text-sm opacity-50 cursor-not-allowed flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">lock</span>
+                Modul Hinzufügen
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col relative pb-24 md:pb-0">
+<!-- TopAppBar (Execution from JSON) -->
+<header class="glass-header sticky top-0 z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="font-headline text-lg font-bold tracking-tight text-primary">M.Sc. Economics Grade Tracker</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-label text-xs tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">BASISBEREICH</a>
+<a class="font-label text-xs tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">SCHWERPUNKT</a>
+<a class="font-label text-xs tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">ERGÄNZUNG ECON</a>
+<a class="font-label text-xs tracking-widest text-primary border-b-2 border-primary pb-1 font-bold" href="#">ERGÄNZUNG MSS</a>
+<a class="font-label text-xs tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">MASTERARBEIT</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-95 transition-all">account_circle</span>
+</div>
+</header>
+<!-- Dynamic Content Canvas -->
+<div class="p-6 md:p-10 space-y-8 max-w-7xl mx-auto w-full">
+<!-- Area Status Hero -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+<div class="lg:col-span-8 space-y-4">
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 bg-secondary-container/20 text-secondary border border-secondary/30 rounded text-[10px] font-bold tracking-[0.1em] uppercase">Status: Abgeschlossen</span>
+</div>
+<h2 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tighter text-on-surface">Ergänzung MSS</h2>
+<p class="text-on-surface-variant max-w-xl font-body">Methoden der Statistik und Informatik. Dieser Bereich dient der Vertiefung quantitativer Analysefähigkeiten für fortgeschrittene ökonomische Modellierung.</p>
+</div>
+<div class="lg:col-span-4 flex flex-col items-end">
+<div class="text-right mb-2">
+<span class="font-headline text-4xl font-bold text-secondary tabular-nums">12 / 12</span>
+<span class="font-label text-sm text-on-surface-variant ml-2 uppercase tracking-widest">ECTS</span>
+</div>
+<div class="w-full h-3 bg-surface-container-low rounded-full overflow-hidden relative">
+<div class="absolute top-0 left-0 h-full w-full bg-secondary neon-glow-secondary"></div>
+</div>
+</div>
+</section>
+<!-- Locked Warning Banner -->
+<div class="bg-secondary-container/10 border-l-4 border-secondary p-4 flex items-center gap-4 transition-all duration-300">
+<span class="material-symbols-outlined text-secondary">verified</span>
+<p class="font-body text-sm text-on-surface tracking-wide">
+                    ECTS-Limit erreicht. Keine weiteren Module in diesem Bereich möglich.
+                </p>
+</div>
+<!-- Bento Grid of Content -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Grade Average Card -->
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between min-h-[160px] border border-outline-variant/5">
+<div class="flex justify-between items-start">
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-widest">Gewichteter Schnitt</span>
+<span class="material-symbols-outlined text-secondary/60">analytics</span>
+</div>
+<div>
+<span class="font-headline text-5xl font-bold text-on-surface">1,3</span>
+<p class="text-secondary text-xs mt-1 font-medium">Top 5% des Jahrgangs</p>
+</div>
+</div>
+<!-- Module Item 1 -->
+<div class="bg-surface-container p-6 rounded-xl space-y-4 border border-outline-variant/10">
+<div class="flex justify-between">
+<span class="text-[10px] bg-surface-variant px-2 py-0.5 rounded text-on-surface-variant font-bold uppercase">Pflichtmodul</span>
+<span class="font-headline text-secondary font-bold text-lg">1,0</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface leading-tight">Advanced Econometrics I</h3>
+<div class="flex justify-between items-center text-xs text-on-surface-variant font-medium">
+<span>WS 2023/24</span>
+<span>6 ECTS</span>
+</div>
+</div>
+<!-- Module Item 2 -->
+<div class="bg-surface-container p-6 rounded-xl space-y-4 border border-outline-variant/10">
+<div class="flex justify-between">
+<span class="text-[10px] bg-surface-variant px-2 py-0.5 rounded text-on-surface-variant font-bold uppercase">Wahlpflicht</span>
+<span class="font-headline text-secondary font-bold text-lg">1,7</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface leading-tight">Computational Methods</h3>
+<div class="flex justify-between items-center text-xs text-on-surface-variant font-medium">
+<span>SS 2024</span>
+<span>6 ECTS</span>
+</div>
+</div>
+<!-- Background Visual (Editorial Style) -->
+<div class="md:col-span-2 lg:col-span-3 h-48 rounded-2xl overflow-hidden relative group">
+<img alt="Data visualization" class="w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:scale-105 transition-transform duration-700" data-alt="Abstract cinematic visualization of data points and glowing network connections on a deep obsidian digital canvas with neon blue highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv_A1AOvz05QyIy33xzcrp095MtmeItJyrOHk83wrwfoheU25KdHu84MGkJZ69O7rLmT3AC65n33Tc1xsm1WvhcUP4Emni4V9_gpRy_nu3kdK30PRqLiyyr4HauRfZKDMdnhEwgSx50VkLwQCxSLuVS0kTQw1gvJZtjnV26gbKN2umDH7dqIIepuHcZ5MWwo9AAOMv8RN-12zwcLEEV2lG_Dbd2R369Pt9AHmgN_6t5z-ePAP8XjCaWUGM3YMVTiwgfrAHAsPfeQeJ"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-transparent to-surface/80"></div>
+<div class="absolute bottom-6 left-8">
+<h4 class="font-headline text-2xl font-bold text-primary">Akademischer Fortschritt</h4>
+<p class="text-on-surface-variant text-sm">Validiert durch das Prüfungsamt am 12.10.2024</p>
+</div>
+</div>
+</div>
+</div>
+<!-- FAB (Disabled) -->
+<button class="fixed bottom-24 right-6 md:bottom-10 md:right-10 w-14 h-14 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg opacity-50 cursor-not-allowed z-50 transition-all active:scale-95" disabled="">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+</button>
+<!-- BottomNavBar (Mobile Execution) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest flex justify-around items-center pb-safe pt-2 px-4 z-50 border-t border-outline-variant/15 shadow-[0_-4px_24px_rgba(173,198,255,0.06)]">
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">dashboard</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">DASHBOARD</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-xl p-2 scale-90 duration-150" href="#">
+<span class="material-symbols-outlined text-2xl">account_tree</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">MODULE</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">insights</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">STATISTIKEN</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">PROFIL</span>
+</a>
+</nav>
+</main>
+</body></html>

@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-zinc-950 text-zinc-100 antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply overscroll-none;
+  }
+  /* Safe area for bottom nav on iOS */
+  :root {
+    --sab: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: calc(0.5rem + var(--sab));
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

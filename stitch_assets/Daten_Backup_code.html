@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daten &amp; Backup - M.Sc. Economics Grade Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed-variant": "#005236",
+              "surface": "#0c1324",
+              "on-error": "#690005",
+              "primary-fixed": "#d8e2ff",
+              "outline": "#8c909f",
+              "outline-variant": "#424754",
+              "surface-tint": "#adc6ff",
+              "secondary-container": "#00a572",
+              "primary-fixed-dim": "#adc6ff",
+              "primary": "#adc6ff",
+              "error-container": "#93000a",
+              "on-primary-container": "#00285d",
+              "surface-container-lowest": "#070d1f",
+              "on-surface-variant": "#c2c6d6",
+              "inverse-primary": "#005ac2",
+              "on-primary-fixed-variant": "#004395",
+              "tertiary-container": "#8083ff",
+              "on-error-container": "#ffdad6",
+              "background": "#0c1324",
+              "on-secondary-fixed": "#002113",
+              "surface-dim": "#0c1324",
+              "inverse-surface": "#dce1fb",
+              "surface-container-low": "#151b2d",
+              "primary-container": "#4d8eff",
+              "on-primary": "#002e6a",
+              "on-tertiary-container": "#0d0096",
+              "surface-variant": "#2e3447",
+              "tertiary": "#c0c1ff",
+              "on-tertiary": "#1000a9",
+              "on-tertiary-fixed-variant": "#2f2ebe",
+              "on-background": "#dce1fb",
+              "error": "#ffb4ab",
+              "surface-container-high": "#23293c",
+              "tertiary-fixed": "#e1e0ff",
+              "inverse-on-surface": "#2a3043",
+              "secondary-fixed": "#6ffbbe",
+              "on-primary-fixed": "#001a42",
+              "secondary-fixed-dim": "#4edea3",
+              "secondary": "#4edea3",
+              "surface-container-highest": "#2e3447",
+              "tertiary-fixed-dim": "#c0c1ff",
+              "surface-container": "#191f31",
+              "on-secondary-container": "#00311f",
+              "on-surface": "#dce1fb",
+              "on-secondary": "#003824",
+              "on-tertiary-fixed": "#07006c",
+              "surface-bright": "#33394c"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .neon-glow-primary {
+            filter: drop-shadow(0 0 8px #adc6ff);
+        }
+        .neon-glow-secondary {
+            filter: drop-shadow(0 0 8px #4edea3);
+        }
+        .neon-glow-error {
+            filter: drop-shadow(0 0 8px #ffb4ab);
+        }
+        .glass-header {
+            background: rgba(12, 19, 36, 0.4);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-[#0c1324]/40 backdrop-blur-xl text-[#adc6ff] docked full-width top-0 sticky z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="text-lg font-bold tracking-tight text-[#adc6ff]">M.Sc. Economics Grade Tracker</span>
+</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-[#c2c6d6] hover:text-[#adc6ff] transition-colors font-label text-xs tracking-widest uppercase" href="#">Basisbereich</a>
+<a class="text-[#c2c6d6] hover:text-[#adc6ff] transition-colors font-label text-xs tracking-widest uppercase" href="#">Schwerpunkt</a>
+<a class="text-[#c2c6d6] hover:text-[#adc6ff] transition-colors font-label text-xs tracking-widest uppercase" href="#">Ergänzung Econ</a>
+<a class="text-[#c2c6d6] hover:text-[#adc6ff] transition-colors font-label text-xs tracking-widest uppercase" href="#">Ergänzung MSS</a>
+<a class="text-[#c2c6d6] hover:text-[#adc6ff] transition-colors font-label text-xs tracking-widest uppercase" href="#">Masterarbeit</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl cursor-pointer hover:bg-[#191f31] p-2 rounded-full transition-all duration-200">account_circle</span>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-72px)] sticky top-[72px] bg-[#0c1324] w-64 border-r border-[#8c909f]/15">
+<div class="p-6">
+<h2 class="font-headline font-black text-[#adc6ff] text-xl">M.Sc. Economics</h2>
+<p class="font-label text-xs uppercase tracking-wider text-outline">Akademisches Audit</p>
+</div>
+<nav class="flex-1 space-y-2 mt-4">
+<div class="flex items-center py-3 text-[#c2c6d6] pl-4 hover:bg-[#151b2d] transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mr-3">school</span>
+<span class="font-label text-sm uppercase">Basisbereich (24 ECTS)</span>
+</div>
+<div class="flex items-center py-3 text-[#c2c6d6] pl-4 hover:bg-[#151b2d] transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mr-3">biotech</span>
+<span class="font-label text-sm uppercase">Schwerpunkt (30 ECTS)</span>
+</div>
+<div class="flex items-center py-3 text-[#c2c6d6] pl-4 hover:bg-[#151b2d] transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-label text-sm uppercase">Ergänzung Econ (24 ECTS)</span>
+</div>
+<div class="flex items-center py-3 text-[#c2c6d6] pl-4 hover:bg-[#151b2d] transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mr-3">functions</span>
+<span class="font-label text-sm uppercase">Ergänzung MSS (12 ECTS)</span>
+</div>
+<div class="flex items-center py-3 text-[#4edea3] font-bold border-l-4 border-[#4edea3] pl-4 bg-[#151b2d] transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mr-3">history_edu</span>
+<span class="font-label text-sm uppercase">Daten &amp; Backup</span>
+</div>
+</nav>
+<div class="p-6 border-t border-[#8c909f]/15">
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold rounded-xl text-sm uppercase tracking-widest neon-glow-primary transform active:scale-95 transition-all">
+                    Modul Hinzufügen
+                </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-h-screen bg-surface p-6 lg:p-12">
+<!-- Asymmetric Hero Section -->
+<div class="max-w-5xl mx-auto space-y-12">
+<header class="space-y-2">
+<h1 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface">Daten &amp; <span class="text-primary">Beständigkeit</span></h1>
+<p class="font-body text-on-surface-variant max-w-xl">Verwalte deine akademischen Aufzeichnungen. Da wir keine Daten auf externen Servern speichern, liegt die Verantwortung für die Datensicherheit vollständig in deinen Händen.</p>
+</header>
+<!-- Warning Banner -->
+<section class="bg-surface-container-low rounded-2xl p-6 border-l-4 border-error neon-glow-error flex items-start gap-5">
+<span class="material-symbols-outlined text-error text-3xl mt-1">warning</span>
+<div class="space-y-1">
+<h3 class="font-headline text-lg font-bold text-error">Wichtiger Sicherheitshinweis</h3>
+<p class="font-body text-on-surface-variant">Alle Daten werden lokal im Browser gespeichert. Erstelle Backups, um Datenverlust zu vermeiden.</p>
+</div>
+</section>
+<!-- Bento Grid Layout for Actions -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Export Card -->
+<div class="bg-surface-container rounded-2xl p-8 flex flex-col justify-between group hover:bg-surface-container-high transition-all duration-300">
+<div class="space-y-4">
+<div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-3xl">cloud_download</span>
+</div>
+<h2 class="font-headline text-2xl font-bold">Daten exportieren</h2>
+<p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                                Lade eine vollständige Kopie deiner Noten und deines Studienfortschritts als strukturierte Datei herunter. Ideal für manuelle Backups oder den Umzug auf ein anderes Gerät.
+                            </p>
+</div>
+<div class="mt-8">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-black rounded-xl uppercase tracking-tighter text-lg neon-glow-primary transform active:scale-95 transition-all">
+                                Daten exportieren (.json)
+                            </button>
+</div>
+</div>
+<!-- Import Card -->
+<div class="bg-surface-container rounded-2xl p-8 flex flex-col justify-between group hover:bg-surface-container-high transition-all duration-300">
+<div class="space-y-4">
+<div class="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-3xl">upload_file</span>
+</div>
+<h2 class="font-headline text-2xl font-bold">Daten importieren</h2>
+<p class="font-body text-on-surface-variant text-sm leading-relaxed">
+                                Stelle deine Daten aus einer zuvor exportierten Datei wieder her. <span class="text-error font-bold italic">Achtung:</span> Vorhandene lokale Daten werden dabei überschrieben.
+                            </p>
+</div>
+<div class="mt-8">
+<button class="w-full py-4 border border-secondary text-secondary font-black rounded-xl uppercase tracking-tighter text-lg hover:bg-secondary/10 transform active:scale-95 transition-all">
+                                Daten importieren (.json)
+                            </button>
+</div>
+</div>
+<!-- Stats / Status Widget (Asymmetric density) -->
+<div class="bg-surface-container-low rounded-2xl p-8 md:col-span-2 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center border border-outline-variant/15">
+<div class="space-y-2">
+<p class="font-label text-xs uppercase tracking-widest text-outline">Letzter Export</p>
+<h4 class="font-headline text-xl font-bold">12. Oktober 2023</h4>
+<p class="font-body text-sm text-on-surface-variant">vor 4 Tagen</p>
+</div>
+<div class="space-y-4 col-span-2">
+<div class="flex justify-between items-end">
+<p class="font-label text-xs uppercase tracking-widest text-outline">Speicherbelegung (Lokal)</p>
+<p class="font-body text-secondary text-sm font-mono">124 KB / 5 MB</p>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[15%] neon-glow-secondary"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Informational Section with Glassmorphism -->
+<section class="relative rounded-2xl overflow-hidden min-h-[300px] flex flex-col justify-end p-8">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40" data-alt="abstract dark architectural lines with deep blue and neon green lighting highlights representing high-tech data storage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcgTbVP0iMoDTLfIZTys42GwcQ1O6Ti7L-T0CE0c_GjGyfT26kQJiEsEj_ZLjbal2uPQnGqsFjy8GQvUDA8-4H0DjLkEnpW52RyYT77tXLO96brRYzepEgsSmKj_fdaDVOcWK_wmdeqERXraJzMM21tFZYW8OPYuUyvXaO3Qts9myQXRHhHWb5oIsAT7ckx7yQKDhucLoVyWwkdh34FRZS_qa-zfdySPc_9qtrUqfpxyOPwuBA-auagw1Tb8iGdDTold_ymefUvzUv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-2xl">
+<h3 class="font-headline text-3xl font-extrabold mb-4">Datenschutz nach dem <span class="text-primary italic">Sentinel</span> Prinzip</h3>
+<p class="font-body text-on-surface-variant">Wir glauben an absolute Datensouveränität. Dein Browser fungiert als dein persönlicher Safe. Keine Cookies, kein Tracking, keine Cloud-Synchronisation ohne deine explizite Handlung.</p>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center pb-safe pt-2 px-4 bg-[#0c1324] z-50 border-t border-[#8c909f]/15 shadow-[0_-4px_24px_rgba(173,198,255,0.06)]">
+<div class="flex flex-col items-center justify-center text-[#8c909f] p-2 hover:text-[#adc6ff]">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8c909f] p-2 hover:text-[#adc6ff]">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Module</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8c909f] p-2 hover:text-[#adc6ff]">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Stats</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#4d8eff]/20 text-[#adc6ff] rounded-xl p-2 active:scale-90 duration-150">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Daten</span>
+</div>
+</nav>
+</body></html>
