@@ -77,7 +77,7 @@ export default function AddModuleModal({ currentArea, isOpen, onClose, editData 
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <label className="block text-xs text-zinc-500 uppercase tracking-wider mb-2">{t('modals.date')}</label>
               <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)}
@@ -94,7 +94,7 @@ export default function AddModuleModal({ currentArea, isOpen, onClose, editData 
             )}
           </div>
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-col md:flex-row gap-3 pt-2">
             <button type="button" onClick={onClose} className="flex-1 py-3 rounded-xl border border-zinc-200 dark:border-white/5 text-zinc-600 dark:text-zinc-400 text-sm font-medium hover:bg-zinc-100 dark:hover:bg-white/[0.03] transition-colors">{t('modals.cancel')}</button>
             <button type="submit" className="flex-1 py-3 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 active:scale-[0.98] transition-all">{t('modals.save')}</button>
           </div>

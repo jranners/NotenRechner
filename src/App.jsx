@@ -85,7 +85,7 @@ export default function App() {
     <div className="h-dvh w-screen overflow-hidden flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-200">
       
       {/* Mobile Top Header containing Settings */}
-      <header className="md:hidden flex items-center justify-between p-4 border-b border-zinc-200 dark:border-white/5 shrink-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl">
+      <header className="md:hidden flex items-center justify-between px-safe pt-safe pb-4 border-b border-zinc-200 dark:border-white/5 shrink-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl">
         <div>
           <h1 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">{t('app.title')}</h1>
           <p className="text-[10px] text-zinc-500 uppercase tracking-widest">{t('app.subtitle')}</p>
@@ -96,7 +96,7 @@ export default function App() {
       </header>
 
       {/* Desktop Sidebar + Content */}
-      <div className="flex flex-1 overflow-hidden relative">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden relative">
         
         {/* Desktop Sidebar */}
         <aside className="hidden md:flex flex-col w-56 lg:w-64 bg-zinc-50 dark:bg-zinc-950 border-r border-zinc-200 dark:border-white/5 shrink-0 relative transition-colors duration-200">
@@ -188,7 +188,7 @@ export default function App() {
       </div>
 
       {/* Mobile Bottom Nav */}
-      <nav className="md:hidden absolute bottom-0 left-0 right-0 flex items-center justify-around bg-white/90 dark:bg-zinc-950/80 backdrop-blur-xl border-t border-zinc-200 dark:border-white/5 pb-safe pt-1.5 px-1 shrink-0 z-50">
+      <nav className="md:hidden absolute bottom-0 left-0 right-0 flex items-center justify-around bg-white/90 dark:bg-zinc-950/80 backdrop-blur-xl border-t border-zinc-200 dark:border-white/5 pb-safe pt-1.5 px-safe-nav shrink-0 z-50">
         {AREA_TABS.map(tab => (
           <button
             key={tab.id}

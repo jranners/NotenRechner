@@ -138,7 +138,7 @@ export default function Onboarding() {
                   </label>
                 ))}
 
-                <div className="flex gap-3 pt-6">
+                <div className="flex flex-col md:flex-row gap-3 pt-6">
                   <button type="button" onClick={() => setStep(1)}
                     className="flex-1 py-3 rounded-xl border border-zinc-200 dark:border-white/5 text-zinc-600 dark:text-zinc-500 text-sm font-medium hover:bg-zinc-50 dark:hover:bg-white/[0.03] transition-colors">
                     {t('onboarding.back')}

@@ -92,7 +92,7 @@ export default function SettingsModal({ isOpen, onClose, setActiveTab }) {
               <p className="text-xs text-red-600 dark:text-red-400 font-medium leading-relaxed bg-red-50 dark:bg-red-400/10 p-3 rounded-lg border border-red-100 dark:border-red-400/20">
                 {t('settings.reset_spec_warning')}
               </p>
-              <div className="flex gap-3">
+              <div className="flex flex-col md:flex-row gap-3">
                 <button 
                   onClick={() => setShowResetWarning(false)}
                   className="flex-1 py-3 rounded-xl text-sm font-semibold text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/10 hover:bg-zinc-50 dark:hover:bg-white/5 active:scale-[0.98] transition-all"
