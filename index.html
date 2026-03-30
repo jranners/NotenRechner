@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -35,39 +35,69 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #ffffff; /* light mode fallback */
+        background-color: #ffffff;
         z-index: 9999;
         transition: opacity 0.4s ease-out;
       }
       html.dark #initial-loader {
-        background-color: #09090b; /* zinc-950 */
+        background-color: #09090b;
       }
       .loader-logo {
-        width: 44px;
-        height: 44px;
+        width: 64px;
+        height: 64px;
         position: relative;
+        color: #18181b;
       }
-      .loader-path {
+      html.dark .loader-logo {
+        color: #f4f4f5;
+        filter: drop-shadow(0 0 16px rgba(244, 244, 245, 0.15));
+      }
+      .loader-track {
         fill: none;
-        stroke: #18181b; /* zinc-900 */
-        stroke-width: 2.5;
+        stroke: currentColor;
+        stroke-width: 1.5;
+        opacity: 0.1;
+      }
+      .loader-line {
+        fill: none;
+        stroke: currentColor;
         stroke-linecap: round;
         stroke-linejoin: round;
-        stroke-dasharray: 100;
-        stroke-dashoffset: 100;
-        animation: drawPath 2s ease-in-out infinite alternate;
+        stroke-dasharray: 120;
+        stroke-dashoffset: 120;
       }
-      html.dark .loader-path {
-        stroke: #f4f4f5; /* zinc-100 */
-      }
-      @keyframes drawPath {
-        0% { stroke-dashoffset: 100; opacity: 0.3; }
-        100% { stroke-dashoffset: 0; opacity: 1; }
+      .line-main { 
+        stroke-width: 4; 
+        animation: flow 2s cubic-bezier(0.7, 0, 0.3, 1) infinite; 
       }
       
-      /* Optional pulsing glow for dark mode */
-      html.dark .loader-logo {
-        filter: drop-shadow(0 0 12px rgba(244, 244, 245, 0.1));
+      .loader-node {
+        fill: #ffffff;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        opacity: 0;
+        transform-origin: center;
+        transform-box: fill-box;
+      }
+      html.dark .loader-node {
+        fill: #09090b;
+      }
+      
+      .node-1 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+      .node-2 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.24s infinite; }
+      .node-3 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s infinite; }
+      .node-4 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s infinite; }
+
+      @keyframes flow {
+        0% { stroke-dashoffset: 120; }
+        40%, 60% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: -120; }
+      }
+      
+      @keyframes pop {
+        0%, 15% { opacity: 0; transform: scale(0.2); }
+        30%, 70% { opacity: 1; transform: scale(1); }
+        85%, 100% { opacity: 0; transform: scale(0.2); }
       }
     </style>
   </head>
@@ -75,9 +105,13 @@
     <div id="root">
       <!-- Splash Screen / Loader -->
       <div id="initial-loader">
-        <svg class="loader-logo" viewBox="0 0 48 48">
-          <!-- Stylized 'N' combining minimalist geometry -->
-          <path class="loader-path" d="M 12 36 L 12 12 L 36 36 L 36 12" />
+        <svg class="loader-logo" viewBox="0 0 64 64">
+          <path class="loader-track" d="M 18 50 L 18 14 L 46 50 L 46 14" />
+          <path class="loader-line line-main" d="M 18 50 L 18 14 L 46 50 L 46 14" />
+          <circle class="loader-node node-1" cx="18" cy="50" r="5" />
+          <circle class="loader-node node-2" cx="18" cy="14" r="5" />
+          <circle class="loader-node node-3" cx="46" cy="50" r="5" />
+          <circle class="loader-node node-4" cx="46" cy="14" r="6" style="fill: currentColor;" />
         </svg>
       </div>
     </div>
