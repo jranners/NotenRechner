@@ -12,6 +12,12 @@ export function StoreProvider({ children }) {
     return localStorage.getItem('nr_specialization') || null;
   });
 
+  const [hasOnboarded, setHasOnboarded] = useState(() => {
+    const saved = localStorage.getItem('nr_has_onboarded');
+    if (saved !== null) return saved === 'true';
+    return localStorage.getItem('nr_specialization') !== null || !!localStorage.getItem('nr_selectedModules');
+  });
+
   const [selectedModules, setSelectedModules] = useState(() => {
     const saved = localStorage.getItem('nr_selectedModules');
     return saved ? JSON.parse(saved) : [];
@@ -24,6 +30,19 @@ export function StoreProvider({ children }) {
       localStorage.removeItem('nr_specialization');
     }
   }, [specialization]);
+
+  useEffect(() => {
+    localStorage.setItem('nr_has_onboarded', hasOnboarded);
+  }, [hasOnboarded]);
+
+  useEffect(() => {
+    localStorage.setItem('nr_selectedModules', JSON.stringify(selectedModules));
+  }, [selectedModules]);
+
+  const resetSpecialization = () => {
+    setSelectedModules(prev => prev.filter(m => m.area !== 'schwerpunkt'));
+    setSpecialization(null);
+  };
 
   useEffect(() => {
     localStorage.setItem('nr_selectedModules', JSON.stringify(selectedModules));
@@ -74,19 +93,37 @@ export function StoreProvider({ children }) {
     return true;
   };
 
+  const METHODS_MODULE_IDS = ['am_empirical', 'am_comp', 'am_sel_metrics'];
+
   const getAvailableModulesForArea = (area, editModuleId = null) => {
     const selectedIds = selectedModules.map(m => m.id);
+    
+    // Check if a method module is already selected IN THE SCHWERPUNKT
+    const selectedMethodInSchwerpunkt = selectedModules.find(
+      m => m.area === 'schwerpunkt' && METHODS_MODULE_IDS.includes(m.id)
+    );
+
     return MODULE_DATABASE.filter(m => {
       const inArea = m.areas.includes(area);
       // Bypass: Wenn das Modul gerade editiert wird, MUSS es in der Liste bleiben
       const notSelected = !selectedIds.includes(m.id) || m.id === editModuleId;
 
+      // XOR Logic for Schwerpunkt Methods
+      let isMethodAllowed = true;
+      if (area === 'schwerpunkt' && METHODS_MODULE_IDS.includes(m.id)) {
+        // Only restrict if a different method module is already selected
+        if (selectedMethodInSchwerpunkt && selectedMethodInSchwerpunkt.id !== m.id && m.id !== editModuleId) {
+           isMethodAllowed = false;
+        }
+      }
+
       // Strikte Null-Safety für das specializations-Array (?.)
       if (area === 'schwerpunkt' && specialization && specialization !== 'skipped') {
         const matchesSpec = m.specializations?.includes(specialization) || false;
-        return inArea && notSelected && matchesSpec;
+        return inArea && notSelected && matchesSpec && isMethodAllowed;
       }
-      return inArea && notSelected;
+      
+      return inArea && notSelected && isMethodAllowed;
     });
   };
 
@@ -101,8 +138,11 @@ export function StoreProvider({ children }) {
   };
 
   const value = {
+    hasOnboarded,
+    setHasOnboarded,
     specialization,
     setSpecialization,
+    resetSpecialization,
     selectedModules,
     setSelectedModules, // Exposed for Backup
     addModule,

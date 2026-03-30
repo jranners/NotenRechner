@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useStore } from '../StoreContext';
+import { useAppConfig } from '../contexts/AppConfigContext';
 import { AREA_LIMITS, MODULE_DATABASE } from '../data';
 import AddModuleModal from './AddModuleModal';
 import DeleteModal from './DeleteModal';
 
 export default function Dashboard({ area }) {
-  const { selectedModules, isAreaLocked, removeModule } = useStore();
+  const { selectedModules, isAreaLocked, removeModule, specialization } = useStore();
+  const { t } = useAppConfig();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editData, setEditData] = useState(null);
   const [moduleToDelete, setModuleToDelete] = useState(null);
@@ -29,64 +31,73 @@ export default function Dashboard({ area }) {
   }, { ws: 0, tl: 0 });
   const areaGpa = tl > 0 ? (ws / tl) : null;
 
-  const labels = {
-    basis: 'Basisbereich', schwerpunkt: 'Schwerpunkt',
-    ergaenzung_econ: 'Ergänzung Econ', ergaenzung_mss: 'Ergänzung MSS', thesis: 'Masterarbeit'
+  const SPEC_LABELS = {
+    emda: 'Empirical Methods and Data Analysis',
+    mep: 'Markets and Economic Policy',
+    mdb: 'Market Design and Behavior',
+    ecc: 'Energy and Climate Change',
   };
 
+  let areaTitle = t(`dashboard.${area}`);
+  if (area === 'schwerpunkt' && specialization && specialization !== 'skipped') {
+    if (SPEC_LABELS[specialization]) {
+      areaTitle = `${areaTitle} ${SPEC_LABELS[specialization]}`;
+    }
+  }
+
   return (
-    <div className="p-5 md:p-8 lg:p-12 max-w-3xl mx-auto w-full">
+    <div className="p-5 md:p-8 lg:p-12 max-w-3xl mx-auto w-full transition-colors duration-200">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold text-zinc-100 tracking-tight">{labels[area]}</h1>
+        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">{areaTitle}</h1>
         <div className="flex items-center gap-4 mt-2 text-sm">
-          <span className="text-zinc-400 tabular-nums">{currentLp}/{maxLp} ECTS</span>
+          <span className="text-zinc-500 dark:text-zinc-400 tabular-nums">{currentLp}/{maxLp} {t('dashboard.ects')}</span>
           {areaGpa !== null && (
-            <span className="text-zinc-400">· Schnitt <span className="text-zinc-200 font-medium tabular-nums">{areaGpa.toFixed(2)}</span></span>
+            <span className="text-zinc-500 dark:text-zinc-400">· {t('dashboard.average')} <span className="text-zinc-800 dark:text-zinc-200 font-medium tabular-nums">{areaGpa.toFixed(2)}</span></span>
           )}
-          {locked && <span className="text-xs text-zinc-500 bg-white/5 px-2 py-0.5 rounded">Abgeschlossen</span>}
+          {locked && <span className="text-xs text-zinc-600 dark:text-zinc-500 bg-zinc-100 dark:bg-white/5 px-2 py-0.5 rounded border border-zinc-200 dark:border-white/[0.02]">{t('dashboard.completed')}</span>}
         </div>
         {/* Progress */}
-        <div className="mt-4 h-1 w-full bg-zinc-800/60 rounded-full overflow-hidden">
-          <div className="h-full bg-zinc-400 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
+        <div className="mt-4 h-1 w-full bg-zinc-200 dark:bg-zinc-800/60 rounded-full overflow-hidden">
+          <div className="h-full bg-zinc-600 dark:bg-zinc-400 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
       {/* Module List */}
       <div className="space-y-2">
         {areaModules.length === 0 ? (
-          <div className="text-center py-16 text-zinc-500 text-sm">
+          <div className="text-center py-16 text-zinc-400 dark:text-zinc-500 text-sm">
             <span className="material-symbols-outlined text-3xl block mb-2 opacity-40">inbox</span>
-            Keine Module in diesem Bereich.
+            {t('dashboard.empty')}
           </div>
         ) : (
           areaModules.map(mod => {
             const db = MODULE_DATABASE.find(d => d.id === mod.id);
             return (
-              <div key={mod.id} className="bg-zinc-900 rounded-2xl p-4 flex items-center gap-4 group hover:bg-zinc-900/80 transition-colors border border-white/[0.03]">
+              <div key={mod.id} className="bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-4 flex items-center gap-4 group hover:bg-zinc-100 dark:hover:bg-zinc-900/80 transition-colors border border-zinc-200 dark:border-white/[0.03] shadow-sm dark:shadow-none">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-zinc-100 truncate">{db?.name}</p>
+                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-100 truncate">{db?.name}</p>
                   <div className="flex items-center gap-2 mt-1 text-xs text-zinc-500">
-                    <span>{db?.lp} ECTS</span>
+                    <span>{db?.lp} {t('dashboard.ects')}</span>
                     <span>·</span>
                     <span>{mod.date}</span>
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <span className="text-lg font-semibold text-zinc-200 tabular-nums">
-                    {mod.grade === 'Bestanden (Unbenotet)' ? 'B' : mod.grade}
+                  <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 tabular-nums">
+                    {mod.grade === 'Bestanden (Unbenotet)' ? t('dashboard.passed') : mod.grade}
                   </span>
                 </div>
-                <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-0.5 sm:opacity-0 group-hover:opacity-100 transition-opacity">
                   <button
                     onClick={(e) => { e.stopPropagation(); setEditData(mod); setIsModalOpen(true); }}
-                    className="p-2 rounded-lg text-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-colors"
+                    className="p-2 rounded-lg text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-white/5 transition-colors"
                   >
                     <span className="material-symbols-outlined text-[18px]">edit</span>
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); setModuleToDelete(mod); }}
-                    className="p-2 rounded-lg text-zinc-500 hover:text-red-400 hover:bg-red-500/5 transition-colors"
+                    className="p-2 rounded-lg text-zinc-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/5 transition-colors"
                   >
                     <span className="material-symbols-outlined text-[18px]">delete</span>
                   </button>
@@ -101,10 +112,10 @@ export default function Dashboard({ area }) {
       {!locked && (
         <button
           onClick={() => setIsModalOpen(true)}
-          className="mt-4 w-full py-3 rounded-2xl border border-dashed border-zinc-700 text-zinc-500 text-sm hover:border-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02] transition-all flex items-center justify-center gap-2"
+          className="mt-4 w-full py-3 rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-500 text-sm hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-white/[0.02] transition-all flex items-center justify-center gap-2"
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
-          Modul hinzufügen
+          {t('dashboard.add_module')}
         </button>
       )}
 
