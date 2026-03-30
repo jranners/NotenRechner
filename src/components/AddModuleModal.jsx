@@ -81,7 +81,7 @@ export default function AddModuleModal({ currentArea, isOpen, onClose, editData 
             <div className="flex-1">
               <label className="block text-xs text-zinc-500 uppercase tracking-wider mb-2">{t('modals.date')}</label>
               <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-white/5 rounded-lg text-zinc-900 dark:text-zinc-200 py-2.5 px-3 text-sm outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
+                className="w-full bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-white/5 rounded-lg text-zinc-900 dark:text-zinc-200 py-2.5 px-3 text-base outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
               />
             </div>
             {selectedModuleObj && (

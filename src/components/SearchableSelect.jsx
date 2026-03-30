@@ -34,7 +34,7 @@ export default function SearchableSelect({ options, value, onChange, placeholder
         <div className="absolute top-full left-0 right-0 z-[110] mt-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/5 rounded-xl shadow-2xl overflow-hidden">
           <div className="p-2.5 border-b border-zinc-200 dark:border-white/5">
             <input ref={inputRef} type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder={t('modals.search')}
-              className="w-full bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-zinc-200 text-sm py-2 px-3 rounded-lg border border-zinc-200 dark:border-white/5 outline-none focus:border-zinc-400 dark:focus:border-zinc-600 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 transition-colors"
+              className="w-full bg-zinc-50 dark:bg-zinc-800/60 text-zinc-900 dark:text-zinc-200 text-base py-2 px-3 rounded-lg border border-zinc-200 dark:border-white/5 outline-none focus:border-zinc-400 dark:focus:border-zinc-600 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 transition-colors"
             />
           </div>
           <div className="max-h-48 overflow-y-auto">
