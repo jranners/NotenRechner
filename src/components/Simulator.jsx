@@ -64,24 +64,12 @@ export default function Simulator() {
     pathItems = data;
   }
 
-  const handleDecrement = () => {
-    setTargetGrade(prev => {
-      const idx = DISCRETE_GRADES.indexOf(prev);
-      if (idx === -1) return DISCRETE_GRADES[0];
-      return idx === DISCRETE_GRADES.length - 1
-        ? DISCRETE_GRADES[DISCRETE_GRADES.length - 1]
-        : DISCRETE_GRADES[idx + 1]; // numerically higher = worse grade
-    });
+  const handleIncrease = () => {
+    setTargetGrade(prev => Math.min(4.0, Math.round((prev + 0.01) * 100) / 100));
   };
 
-  const handleIncrement = () => {
-    setTargetGrade(prev => {
-      const idx = DISCRETE_GRADES.indexOf(prev);
-      if (idx === -1) return DISCRETE_GRADES[0];
-      return idx === 0
-        ? DISCRETE_GRADES[0]
-        : DISCRETE_GRADES[idx - 1]; // numerically lower = better grade
-    });
+  const handleDecrease = () => {
+    setTargetGrade(prev => Math.max(1.0, Math.round((prev - 0.01) * 100) / 100));
   };
 
   return (
@@ -112,7 +100,7 @@ export default function Simulator() {
           <div className="mt-3 flex items-center gap-3">
             <button
               type="button"
-              onClick={handleDecrement}
+              onClick={handleDecrease}
               className="flex items-center justify-center w-9 h-9 rounded-full border border-zinc-200 dark:border-zinc-700
                          bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-100 hover:bg-zinc-50
                          dark:hover:bg-zinc-800 active:scale-95 transition-all"
@@ -121,7 +109,7 @@ export default function Simulator() {
             </button>
             <button
               type="button"
-              onClick={handleIncrement}
+              onClick={handleIncrease}
               className="flex items-center justify-center w-9 h-9 rounded-full border border-zinc-200 dark:border-zinc-700
                          bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-100 hover:bg-zinc-50
                          dark:hover:bg-zinc-800 active:scale-95 transition-all"
