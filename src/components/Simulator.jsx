@@ -8,7 +8,7 @@ const DISCRETE_GRADES = [1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0];
 export default function Simulator() {
   const { selectedModules } = useStore();
   const { t } = useAppConfig();
-  const [targetGrade, setTargetGrade] = useState(1.5);
+  const [targetGrade, setTargetGrade] = useState(1.7);
 
   let totalLpDone = 0, gradedLpDone = 0, gradedSum = 0;
   selectedModules.forEach(sm => {
@@ -64,6 +64,26 @@ export default function Simulator() {
     pathItems = data;
   }
 
+  const handleDecrement = () => {
+    setTargetGrade(prev => {
+      const idx = DISCRETE_GRADES.indexOf(prev);
+      if (idx === -1) return DISCRETE_GRADES[0];
+      return idx === DISCRETE_GRADES.length - 1
+        ? DISCRETE_GRADES[DISCRETE_GRADES.length - 1]
+        : DISCRETE_GRADES[idx + 1]; // numerically higher = worse grade
+    });
+  };
+
+  const handleIncrement = () => {
+    setTargetGrade(prev => {
+      const idx = DISCRETE_GRADES.indexOf(prev);
+      if (idx === -1) return DISCRETE_GRADES[0];
+      return idx === 0
+        ? DISCRETE_GRADES[0]
+        : DISCRETE_GRADES[idx - 1]; // numerically lower = better grade
+    });
+  };
+
   return (
     <div className="p-5 md:p-8 lg:p-12 max-w-2xl mx-auto w-full transition-colors duration-200">
       <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight mb-8">{t('simulator.title')}</h1>
@@ -85,9 +105,31 @@ export default function Simulator() {
 
       <div className="bg-zinc-50 dark:bg-zinc-900 rounded-2xl p-5 border border-zinc-200 dark:border-white/[0.03] mb-6 shadow-sm dark:shadow-none">
         <label className="block text-xs text-zinc-500 uppercase tracking-wider mb-3">{t('simulator.target')}</label>
-        <input className="bg-transparent w-full text-3xl font-semibold text-zinc-900 dark:text-zinc-100 outline-none tabular-nums border-b border-zinc-200 dark:border-zinc-800 pb-2 focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
-          type="number" min="1.00" max="4.00" step="0.01" value={targetGrade} onChange={e => setTargetGrade(parseFloat(e.target.value) || 1.0)}
-        />
+        <div className="flex flex-col items-start">
+          <div className="text-3xl font-semibold text-zinc-900 dark:text-zinc-100 tabular-nums leading-none">
+            {targetGrade.toFixed(2)}
+          </div>
+          <div className="mt-3 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={handleDecrement}
+              className="flex items-center justify-center w-9 h-9 rounded-full border border-zinc-200 dark:border-zinc-700
+                         bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-100 hover:bg-zinc-50
+                         dark:hover:bg-zinc-800 active:scale-95 transition-all"
+            >
+              <span className="material-symbols-outlined text-[18px]">remove</span>
+            </button>
+            <button
+              type="button"
+              onClick={handleIncrement}
+              className="flex items-center justify-center w-9 h-9 rounded-full border border-zinc-200 dark:border-zinc-700
+                         bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-100 hover:bg-zinc-50
+                         dark:hover:bg-zinc-800 active:scale-95 transition-all"
+            >
+              <span className="material-symbols-outlined text-[18px]">add</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className={`rounded-2xl p-5 border ${
