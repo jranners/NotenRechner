@@ -38,12 +38,12 @@ export default function AddModuleModal({ currentArea, isOpen, onClose, editData 
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-end md:justify-center font-sans">
+    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-end md:justify-center font-sans" style={{ WebkitOverflowScrolling: 'touch' }}>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       <motion.div
         initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 100, opacity: 0 }}
         transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-        className="relative w-full max-w-lg bg-white dark:bg-zinc-900 rounded-t-2xl md:rounded-2xl border border-zinc-200 dark:border-white/5 p-6 pb-8 z-10 max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-lg bg-white dark:bg-zinc-900 rounded-t-2xl md:rounded-2xl border border-zinc-200 dark:border-white/5 p-6 pb-[calc(2rem+env(safe-area-inset-bottom))] z-10 max-h-[85dvh] overflow-y-auto"
       >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{editData ? t('modals.edit_title') : t('modals.add_title')}</h2>
@@ -62,13 +62,13 @@ export default function AddModuleModal({ currentArea, isOpen, onClose, editData 
 
           <div>
             <label className="block text-xs text-zinc-500 uppercase tracking-wider mb-2">{t('modals.grade')}</label>
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-1.5">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-1.5">
               {GRADES.map(g => {
                 const active = selectedGrade === g;
                 const unb = g === 'Bestanden (Unbenotet)';
                 return (
                   <button key={g} type="button" onClick={() => setSelectedGrade(g)}
-                    className={`py-2 px-1 rounded-lg text-sm border transition-all ${unb ? 'col-span-2 text-[10px] uppercase tracking-wider' : ''} ${
+                    className={`py-2 px-1 rounded-lg text-sm border transition-all min-h-[44px] min-w-[44px] ${unb ? 'col-span-2 text-[10px] uppercase tracking-wider' : ''} ${
                       active ? 'bg-zinc-200 dark:bg-white/10 border-zinc-400 dark:border-zinc-500 text-zinc-900 dark:text-zinc-100 font-semibold shadow-sm' : 'bg-zinc-50 dark:bg-zinc-800/40 border-zinc-200 dark:border-white/5 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-600'
                     }`}
                   >{unb ? t('dashboard.passed') : g}</button>
@@ -77,24 +77,22 @@ export default function AddModuleModal({ currentArea, isOpen, onClose, editData 
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1">
-              <label className="block text-xs text-zinc-500 uppercase tracking-wider mb-2">{t('modals.date')}</label>
-              <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-white/5 rounded-lg text-zinc-900 dark:text-zinc-200 py-2.5 px-3 text-base outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
-              />
-            </div>
-            {selectedModuleObj && (
-              <div className="flex-1 flex items-end">
-                <div className="w-full p-3 bg-zinc-50 dark:bg-zinc-800/30 rounded-lg border border-zinc-200 dark:border-white/5 text-center shadow-sm dark:shadow-none">
-                  <span className="text-xs text-zinc-500 block">ECTS</span>
-                  <span className="text-lg font-semibold text-zinc-900 dark:text-zinc-200">{selectedModuleObj.lp}</span>
-                </div>
-              </div>
-            )}
+          <div>
+            <label className="flex items-center text-xs text-zinc-500 uppercase tracking-wider mb-2">
+              {t('modals.date')}
+              {selectedModuleObj && (
+                <span className="ml-2 text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2 py-0.5 rounded-full inline-block">
+                  {selectedModuleObj.lp} ECTS
+                </span>
+              )}
+            </label>
+            <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)}
+              autoComplete="off" style={{ fontSize: '16px' }}
+              className="w-full bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-white/5 rounded-lg text-zinc-900 dark:text-zinc-200 py-2.5 px-3 text-base outline-none focus:border-zinc-400 dark:focus:border-zinc-600 transition-colors"
+            />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-3 pt-2">
+          <div className="flex flex-col md:flex-row gap-3 pt-4 pb-2 sticky bottom-0 bg-white dark:bg-zinc-900 z-10">
             <button type="button" onClick={onClose} className="flex-1 py-3 rounded-xl border border-zinc-200 dark:border-white/5 text-zinc-600 dark:text-zinc-400 text-sm font-medium hover:bg-zinc-100 dark:hover:bg-white/[0.03] transition-colors">{t('modals.cancel')}</button>
             <button type="submit" className="flex-1 py-3 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 active:scale-[0.98] transition-all">{t('modals.save')}</button>
           </div>

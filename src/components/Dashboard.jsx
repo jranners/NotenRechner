@@ -88,7 +88,7 @@ export default function Dashboard({ area }) {
                     {mod.grade === 'Bestanden (Unbenotet)' ? t('dashboard.passed') : mod.grade}
                   </span>
                 </div>
-                <div className="flex items-center gap-0.5 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-0.5 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                   <button
                     onClick={(e) => { e.stopPropagation(); setEditData(mod); setIsModalOpen(true); }}
                     className="p-2 rounded-lg text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-white/5 transition-colors"

@@ -4,8 +4,11 @@
 
 @layer base {
   html, body, #root {
-    @apply overflow-hidden select-none;
-    height: 100dvh;
+    @apply select-none;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
   }
   html {
     @apply bg-zinc-950 text-zinc-100 antialiased;
@@ -18,6 +21,11 @@
   /* Prevent iOS auto-zoom by enforcing 16px min size and allow text selection */
   input, textarea, select {
     @apply select-text text-base;
+  }
+  
+  input, textarea, select, button {
+    font-size: 16px !important; /* Prevents iOS auto-zoom */
+    -webkit-text-size-adjust: 100%;
   }
   
   /* Disable double-tap zoom and improve tap responsiveness */
@@ -39,7 +47,7 @@
     padding-top: calc(1rem + var(--sat));
   }
   .pb-safe {
-    padding-bottom: calc(0.5rem + var(--sab));
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
   .px-safe {
     padding-left: calc(1rem + var(--sal));

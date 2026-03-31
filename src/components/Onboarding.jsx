@@ -44,8 +44,8 @@ export default function Onboarding() {
 
   return (
     <div className="h-dvh w-screen bg-white dark:bg-zinc-950 flex flex-col p-6 font-sans transition-colors duration-200">
-      <div className="flex-1 flex items-center justify-center">
-        <div className="w-full max-w-md">
+      <div className="flex-1 overflow-y-auto py-8 px-4 flex flex-col">
+        <div className="w-full max-w-md mx-auto my-auto pb-safe">
           {step === 1 ? (
             <div>
               <div className="mb-10 text-center md:text-left">

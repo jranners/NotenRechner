@@ -85,7 +85,10 @@ export default function App() {
     <div className="h-[100dvh] w-screen overflow-hidden flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-200">
       
       {/* Mobile Top Header containing Settings */}
-      <header className="md:hidden flex items-center justify-between px-safe pt-safe pb-4 border-b border-zinc-200 dark:border-white/5 shrink-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl">
+      <header 
+        className="md:hidden flex items-center justify-between px-safe pb-4 border-b border-zinc-200 dark:border-white/5 shrink-0 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl"
+        style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}
+      >
         <div>
           <h1 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">{t('app.title')}</h1>
           <p className="text-[10px] text-zinc-500 uppercase tracking-widest">{t('app.subtitle')}</p>
@@ -157,7 +160,7 @@ export default function App() {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar pb-[calc(6rem+max(0.5rem,env(safe-area-inset-bottom)))] md:pb-0">
           {isAreaView ? (
             <motion.div
               key={activeTab}
@@ -188,7 +191,10 @@ export default function App() {
       </div>
 
       {/* Mobile Bottom Nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 w-full flex items-center justify-around bg-white/90 dark:bg-zinc-950/80 backdrop-blur-xl border-t border-zinc-200 dark:border-white/5 pb-safe pt-1.5 px-safe-nav shrink-0 z-50">
+      <nav 
+        className="md:hidden fixed bottom-0 left-0 right-0 w-full z-[999] flex items-center justify-around bg-white/90 dark:bg-zinc-950/80 backdrop-blur-xl border-t border-zinc-200 dark:border-white/5 pt-1.5 px-safe-nav shrink-0"
+        style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))', minHeight: 'calc(3.5rem + env(safe-area-inset-bottom))' }}
+      >
         {AREA_TABS.map(tab => (
           <button
             key={tab.id}
