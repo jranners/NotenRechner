@@ -44,10 +44,6 @@ export function StoreProvider({ children }) {
     setSpecialization(null);
   };
 
-  useEffect(() => {
-    localStorage.setItem('nr_selectedModules', JSON.stringify(selectedModules));
-  }, [selectedModules]);
-
   const addModule = (moduleId, area, grade, date) => {
     const module = MODULE_DATABASE.find(m => m.id === moduleId);
     if (!module) return false;

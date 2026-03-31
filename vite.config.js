@@ -12,15 +12,37 @@ export default defineConfig({
         name: 'Grade Tracker M.Sc. Economics',
         short_name: 'Grades',
         description: 'PWA zur Studienplanung und Notenberechnung',
-        theme_color: '#09090b', // zinc-950
+        theme_color: '#09090b',
         background_color: '#09090b',
         display: 'standalone',
+        orientation: 'portrait',
+        start_url: '/grades/',
+        scope: '/grades/',
         icons: [
+          { src: '/grades/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/grades/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: '/grades/icons/icon-512-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+        ]
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        runtimeCaching: [
           {
-            src: 'favicon.svg', // Vorläufiges Icon, falls vorhanden
-            sizes: '512x512',
-            type: 'image/svg+xml',
-            purpose: 'any maskable'
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-stylesheets',
+              expiration: { maxEntries: 5, maxAgeSeconds: 60 * 60 * 24 * 365 }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-webfonts',
+              cacheableResponse: { statuses: [0, 200] },
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 }
+            }
           }
         ]
       }

@@ -46,7 +46,7 @@ export default function App() {
 
   const handleSwipe = (_, info) => {
     if (!isAreaView) return;
-    const threshold = 50;
+    const threshold = 80;
     if (info.offset.x < -threshold && activeIndex < AREA_TABS.length - 1) {
       setActiveTab(AREA_TABS[activeIndex + 1].id);
     } else if (info.offset.x > threshold && activeIndex > 0) {
@@ -165,8 +165,9 @@ export default function App() {
             <motion.div
               key={activeTab}
               drag="x"
+              dragDirectionLock
               dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.15}
+              dragElastic={0.08}
               onDragEnd={handleSwipe}
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -196,29 +197,51 @@ export default function App() {
         style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))', minHeight: 'calc(3.5rem + env(safe-area-inset-bottom))' }}
       >
         {AREA_TABS.map(tab => (
-          <button
+          <motion.button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
+            whileTap={{ scale: 0.85 }}
             className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-lg min-w-0 transition-colors ${
               activeTab === tab.id ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500'
             }`}
           >
-            <span className="material-symbols-outlined text-[20px]">{tab.icon}</span>
+            <span 
+              className="material-symbols-outlined"
+              style={{
+                fontSize: '24px',
+                fontVariationSettings: activeTab === tab.id
+                  ? "'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24"
+                  : "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24"
+              }}
+            >
+              {tab.icon}
+            </span>
             <span className="text-[9px] mt-0.5 truncate max-w-[3.5rem]">{t(tab.labelKey)}</span>
-          </button>
+          </motion.button>
         ))}
         <div className="w-px h-6 bg-zinc-200 dark:bg-white/5 mx-1" />
         {UTIL_TABS.map(tab => (
-          <button
+          <motion.button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
+            whileTap={{ scale: 0.85 }}
             className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-lg min-w-0 transition-colors ${
               activeTab === tab.id ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500'
             }`}
           >
-            <span className="material-symbols-outlined text-[20px]">{tab.icon}</span>
+            <span 
+              className="material-symbols-outlined"
+              style={{
+                fontSize: '24px',
+                fontVariationSettings: activeTab === tab.id
+                  ? "'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24"
+                  : "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24"
+              }}
+            >
+              {tab.icon}
+            </span>
             <span className="text-[9px] mt-0.5 truncate max-w-[3.5rem]">{t(tab.labelKey)}</span>
-          </button>
+          </motion.button>
         ))}
       </nav>
 

@@ -6,27 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- iOS PWA Icons (Safari ignores Web App Manifest icons) -->
+    <link rel="apple-touch-icon" href="/grades/icons/icon-180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/grades/icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/grades/icons/icon-167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/grades/icons/icon-180.png">
+    <!-- iOS Splash / Standalone config -->
+    <meta name="apple-mobile-web-app-title" content="Grades">
     <script>
       (function () {
         try {
-          var localTheme = localStorage.getItem('theme');
-          var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-          if (localTheme === 'dark' || !localTheme || (localTheme === 'system' && darkQuery.matches)) {
-            document.documentElement.classList.add('dark');
-          } else {
-            document.documentElement.classList.remove('dark');
-          }
+          var t = localStorage.getItem('theme');
+          var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var shouldBeDark = t === 'dark' || (!t) || (t === 'system' && dark);
+          document.documentElement.classList.toggle('dark', shouldBeDark);
         } catch (e) {}
       })();
     </script>
     <title>M.Sc. Economics Grade Tracker</title>
     <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
     <!-- Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"></noscript>
     <style>
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        transition: font-variation-settings 0.2s ease;
       }
       /* Loading Screen Styles */
       #initial-loader {
