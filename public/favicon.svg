@@ -3,34 +3,15 @@
     .path-main {
       fill: none;
       stroke: #18181b;
-      stroke-width: 5;
+      stroke-width: 6;
       stroke-linecap: round;
       stroke-linejoin: round;
-    }
-    .node {
-      fill: #ffffff;
-      stroke: #18181b;
-      stroke-width: 3.5;
-    }
-    .node-target {
-      fill: #18181b;
     }
     @media (prefers-color-scheme: dark) {
       .path-main {
         stroke: #f4f4f5;
       }
-      .node {
-        fill: #09090b; /* zinc-950 */
-        stroke: #f4f4f5;
-      }
-      .node-target {
-        fill: #f4f4f5;
-      }
     }
   </style>
-  <path class="path-main" d="M 18 50 L 18 14 L 46 50 L 46 14" />
-  <circle class="node" cx="18" cy="50" r="5" />
-  <circle class="node" cx="18" cy="14" r="5" />
-  <circle class="node" cx="46" cy="50" r="5" />
-  <circle class="node node-target" cx="46" cy="14" r="6" />
+  <path class="path-main" d="M 46 24 C 46 18 42 16 32 16 C 22 16 18 18 18 24 L 18 40 C 18 46 22 48 32 48 C 42 48 46 46 46 40 L 46 32 L 34 32" />
 </svg>

@@ -79,33 +79,10 @@
         animation: flow 2s cubic-bezier(0.7, 0, 0.3, 1) infinite; 
       }
       
-      .loader-node {
-        fill: #ffffff;
-        stroke: currentColor;
-        stroke-width: 2.5;
-        opacity: 0;
-        transform-origin: center;
-        transform-box: fill-box;
-      }
-      html.dark .loader-node {
-        fill: #09090b;
-      }
-      
-      .node-1 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
-      .node-2 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.24s infinite; }
-      .node-3 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s infinite; }
-      .node-4 { animation: pop 2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s infinite; }
-
       @keyframes flow {
         0% { stroke-dashoffset: 120; }
         40%, 60% { stroke-dashoffset: 0; }
         100% { stroke-dashoffset: -120; }
-      }
-      
-      @keyframes pop {
-        0%, 15% { opacity: 0; transform: scale(0.2); }
-        30%, 70% { opacity: 1; transform: scale(1); }
-        85%, 100% { opacity: 0; transform: scale(0.2); }
       }
     </style>
   </head>
@@ -114,12 +91,8 @@
       <!-- Splash Screen / Loader -->
       <div id="initial-loader">
         <svg class="loader-logo" viewBox="0 0 64 64">
-          <path class="loader-track" d="M 18 50 L 18 14 L 46 50 L 46 14" />
-          <path class="loader-line line-main" d="M 18 50 L 18 14 L 46 50 L 46 14" />
-          <circle class="loader-node node-1" cx="18" cy="50" r="5" />
-          <circle class="loader-node node-2" cx="18" cy="14" r="5" />
-          <circle class="loader-node node-3" cx="46" cy="50" r="5" />
-          <circle class="loader-node node-4" cx="46" cy="14" r="6" style="fill: currentColor;" />
+          <path class="loader-track" d="M 46 24 C 46 18 42 16 32 16 C 22 16 18 18 18 24 L 18 40 C 18 46 22 48 32 48 C 42 48 46 46 46 40 L 46 32 L 34 32" />
+          <path class="loader-line line-main" d="M 46 24 C 46 18 42 16 32 16 C 22 16 18 18 18 24 L 18 40 C 18 46 22 48 32 48 C 42 48 46 46 46 40 L 46 32 L 34 32" />
         </svg>
       </div>
     </div>
