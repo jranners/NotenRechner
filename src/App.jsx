@@ -160,7 +160,7 @@ export default function App() {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar pb-[calc(6rem+max(0.5rem,env(safe-area-inset-bottom)))] md:pb-0">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar md:pb-0">
           {isAreaView ? (
             <motion.div
               key={activeTab}
@@ -193,8 +193,8 @@ export default function App() {
 
       {/* Mobile Bottom Nav */}
       <nav 
-        className="md:hidden fixed bottom-0 left-0 right-0 w-full z-40 flex items-center justify-around bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-white/5 pt-1.5 px-safe-nav shrink-0"
-        style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))', minHeight: 'calc(3.5rem + env(safe-area-inset-bottom))' }}
+        className="md:hidden flex items-center justify-around w-full z-40 bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-white/5 pt-1.5 px-safe-nav shrink-0"
+        style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))', minHeight: 'calc(3.5rem + env(safe-area-inset-bottom))' }}
       >
         {AREA_TABS.map(tab => (
           <motion.button
