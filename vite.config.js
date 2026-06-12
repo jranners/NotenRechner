@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/grades/',
+  base: '/NotenRechner/',
   plugins: [
     react(),
     VitePWA({
@@ -16,12 +16,12 @@ export default defineConfig({
         background_color: '#09090b',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/grades/',
-        scope: '/grades/',
+        start_url: '/NotenRechner/',
+        scope: '/NotenRechner/',
         icons: [
-          { src: '/grades/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/grades/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
-          { src: '/grades/icons/icon-512-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+          { src: '/NotenRechner/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/NotenRechner/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: '/NotenRechner/icons/icon-512-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
         ]
       },
       workbox: {
